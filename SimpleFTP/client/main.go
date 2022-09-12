@@ -1,6 +1,9 @@
-package client
+package main
 
-import "fmt"
+import (
+	"client/client"
+	"fmt"
+)
 
 func main() {
 	ip, port, pathOnServer, pathLocal := "", "", "", ""
@@ -18,20 +21,20 @@ func main() {
 		if cm == "1" {
 			fmt.Print("Введите путь к каталогу на сервере:")
 			fmt.Scanf("%s", &pathOnServer)
-			result, err := List(ip, port, pathOnServer)
+			result, err := client.List(ip, port, pathOnServer)
 			if err != nil {
 				fmt.Printf("Ошибка:%v", err)
 				continue
 			}
 			for _, v := range result {
-				fmt.Println("%v %v", v.path, v.isDir)
+				fmt.Println(v.Path, v.IsDir)
 			}
 		} else {
 			fmt.Print("Введите путь к файлу на сервере:")
 			fmt.Scanf("%s", &pathOnServer)
 			fmt.Print("Введите локальный путь, куда сохранить файлу:")
 			fmt.Scanf("%s", &pathLocal)
-			result, err := Get(ip, port, pathOnServer, pathLocal)
+			result, err := client.Get(ip, port, pathOnServer, pathLocal)
 			if err != nil {
 				fmt.Printf("Ошибка:%v", err)
 				continue

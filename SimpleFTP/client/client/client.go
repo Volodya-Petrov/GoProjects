@@ -11,8 +11,8 @@ import (
 )
 
 type FileInfo struct {
-	path  string
-	isDir bool
+	Path  string
+	IsDir bool
 }
 
 func List(ip, port, path string) ([]FileInfo, error) {
@@ -26,7 +26,7 @@ func List(ip, port, path string) ([]FileInfo, error) {
 	fmt.Printf("Connected to %v:%v\n", ip, port)
 	sendReq(conn, "1", path)
 	response, _ := bufio.NewReader(conn).ReadString('\n')
-	splitResponse := strings.Split(response, " ")
+	splitResponse := strings.Split(response[:len(response)-1], " ")
 	size, _ := strconv.Atoi(splitResponse[0])
 	if size < 0 {
 		fmt.Println("File doesn't exist on server")
