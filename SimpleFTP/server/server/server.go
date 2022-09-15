@@ -67,7 +67,7 @@ func listReq(conn net.Conn, path string) {
 			info.WriteString(" ")
 		}
 	}
-	fmt.Fprintf(conn, strconv.Itoa(len(files))+" "+info.String()+"e\n")
+	fmt.Fprintf(conn, strconv.Itoa(len(files))+" "+info.String()+"\n")
 }
 
 func getReq(conn net.Conn, path string) {
